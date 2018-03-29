@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ethereum Voting Dapp</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Bootstrap -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div>
+          <h1 class="text-center">Ethereum Voting Dapp</h1>
+          <hr/>
+          <br/>
+        </div>
+      </div>
+      
+<div id="divMain">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home" onClick="App.start()">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1" onclick="App.findNumOfVotes()">Count Votes</a></li>
+    <li><a data-toggle="tab" href="#menu2">Insert Candidate</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <div class="col-md-4">
+        <p>Add ID and click candidate to vote</p>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="id-input" placeholder="Enter ID">
+        </div>
+        <br>
+        <div id="candidate-box"></div>
+        <button class="btn btn-primary" onclick="App.vote()">Vote</button>
+        <div id="msg"></div>
+      </div>
+    </div>
+    <div id="menu1" class="tab-pane fade" >
+      <div class="row">
+   
+        <div class="col-md-6">
+            <!-- <button class="btn btn-primary" onclick="App.findNumOfVotes()">Count Votes</button> -->
+            <div id="vote-box"></div>
+
+
+            <div id="voter-List"></div>
+        </div>
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+     
+      <p>Candidate Name:</p> <input class="form-control required" required id="txtCanName" type="text">
+      <p>Party Name:</p> <input class="form-control" id="txtPartyName" required type="text">
+      <br>
+      <button class="btn btn-primary" onclick="App.addNewCandidate()">Save</button>
+      <p id="errMsg"></p>
+    </div>
+  </div>
+</div>
+
+	<div class="loginmodal-container" id="divLogin">
+    <h1>Login to Your Account</h1><br>
+    
+    <input type="text" id="userId" name="user" placeholder="Username">
+    <!-- <input type="password" name="pass" placeholder="Password"> -->
+    <!-- <input type="bu" name="login" class="login loginmodal-submit" onclick="App.login()" value="Login"> -->
+    <button class="btn btn-primary" onclick="App.login()">Login</button>
+    
+    
+    <div id="errLogin" class="login-help">
+    <!-- <a href="#">Register</a> - <a href="#">Forgot Password</a> -->
+    </div>
+    <br>
+    <!-- <div class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Your Name</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Your Email</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group">
+            <label for="username" class="cols-sm-2 control-label">Username</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group">
+            <label for="password" class="cols-sm-2 control-label">Password</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group">
+            <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group ">
+            <button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="App.addNewUser()">Register</button>
+          </div>
+   <div id="errReg"></div>
+        </form> -->
+      </div>
+  </div>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+ $('#divMain').hide(); 
+
+  })
+
+</script>
+  
+    <!-- Custom Scripts -->
+    <script src="app.js"></script>
+
+  </body>
+</html>
