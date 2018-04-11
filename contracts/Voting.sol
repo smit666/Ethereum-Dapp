@@ -10,8 +10,9 @@ contract Voting {
 
     // describes a Voter, which has an id and the ID of the candidate they voted for
     struct Voter {
-        bytes32 uid; // bytes32 type are basically strings
+        uint uid; // bytes32 type are basically strings
         uint candidateIDVote;
+        bool doesVoterExist; 
     }
     // describes a Candidate
     struct Candidate {
@@ -70,13 +71,47 @@ contract Voting {
         AddedCandidate(candidateID);
     }
 
-    function vote(bytes32 uid, uint candidateID) public {
+    function vote(uint uid, uint candidateID) public {
         // checks if the struct exists for that candidate
+            int numOfVotes = 0; // we will return this
+            bool flag=false;
+        for (uint i = 0; i < numVoters; i++) {
+            // if the voter votes for this specific candidate, we increment the number
+            if (voters[i].uid == uid) {
+               flag=true;
+                numOfVotes++;
+            }
+        }
+        if(!flag)
+        {
         if (candidates[candidateID].doesExist == true) {
+
+           // if(voters[uid].doesVoterExist==true){
+           
+          //  }else
+          //  {
             uint voterID = numVoters++; //voterID is the return variable
-            voters[voterID] = Voter(uid,candidateID);
+            voters[voterID] = Voter(uid,candidateID,true);
+          //  }
+            
+        }
         }
     }
+
+     function isExists(uint uid) public view returns(bool _isExists) {
+
+ uint numOfVotes = 0; // we will return this
+        for (uint i = 0; i < numVoters; i++) {
+            // if the voter votes for this specific candidate, we increment the number
+            if (voters[i].uid == uid) {
+                return voters[i].doesVoterExist;
+                numOfVotes++;
+            }
+        }
+        return false; 
+
+
+  }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * 
      *  Getter Functions, marked by the key word "view" *
@@ -108,7 +143,18 @@ contract Voting {
         return (candidateID,candidates[candidateID].name,candidates[candidateID].party);
     }
      // returns Voter information
-      function getVoters(uint voterID) public view returns (bytes32) {
+      function getVoters(uint voterID) public view returns (uint) {
         return (voters[voterID].uid);
+    }
+
+    function userExists(uint uid) public view returns(bool){
+         if(uid == voters[uid].uid)
+        {
+            return true;
+        }
+        else
+        {
+           return false;
+        }
     }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Ethereum Voting Dapp</title>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Bootstrap -->
@@ -18,25 +18,25 @@
     <div class="container">
       <div class="row">
         <div>
-          <h1 class="text-center">Ethereum Voting Dapp</h1>
+          <h1 class="text-center">Aadhar Voting Dapp</h1>
           <hr/>
           <br/>
         </div>
       </div>
-      
+
 <div id="divMain">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home" onClick="App.start()">Home</a></li>
     <li><a data-toggle="tab" href="#menu1" onclick="App.findNumOfVotes()">Count Votes</a></li>
     <li><a data-toggle="tab" href="#menu2">Insert Candidate</a></li>
   </ul>
-  
+
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
       <div class="col-md-4">
-        <p>Add ID and click candidate to vote</p>
+        <!-- <p>Add ID and click candidate to vote</p> -->
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="id-input" placeholder="Enter ID">
+          <!-- <input type="number" class="form-control" id="id-input" placeholder="Enter ID"> -->
         </div>
         <br>
         <div id="candidate-box"></div>
@@ -46,7 +46,7 @@
     </div>
     <div id="menu1" class="tab-pane fade" >
       <div class="row">
-   
+
         <div class="col-md-6">
             <!-- <button class="btn btn-primary" onclick="App.findNumOfVotes()">Count Votes</button> -->
             <div id="vote-box"></div>
@@ -57,7 +57,8 @@
       </div>
     </div>
     <div id="menu2" class="tab-pane fade">
-     
+<br>  
+<div></div>
       <p>Candidate Name:</p> <input class="form-control required" required id="txtCanName" type="text">
       <p>Party Name:</p> <input class="form-control" id="txtPartyName" required type="text">
       <br>
@@ -67,22 +68,26 @@
   </div>
 </div>
 
-	<div class="loginmodal-container" id="divLogin">
-    <h1>Login to Your Account</h1><br>
+	<div class="loginmodal-container" id="divLogin" style=" margin: auto;width: 250px;">
+    <!-- <b style="font-size: large">Enter Your Aadhar Number</b><br> -->
+<div class="row">
+  <input type="text"  class="form-control numbersOnly" id="id-input" name="user"  placeholder="Aadhar No.">
+  <!-- <input type="password" name="pass" placeholder="Password"> -->
+  <!-- <input type="bu" name="login" class="login loginmodal-submit" onclick="App.login()" value="Login"> -->
+<br>
+  <button class="btn btn-primary" onclick="App.login()">Login</button>  
+
+</div>
     
-    <input type="text" id="userId" name="user" placeholder="Username">
-    <!-- <input type="password" name="pass" placeholder="Password"> -->
-    <!-- <input type="bu" name="login" class="login loginmodal-submit" onclick="App.login()" value="Login"> -->
-    <button class="btn btn-primary" onclick="App.login()">Login</button>
-    
-    
+
+
     <div id="errLogin" class="login-help">
     <!-- <a href="#">Register</a> - <a href="#">Forgot Password</a> -->
     </div>
     <br>
-    <!-- <div class="main-login main-center">
+ <!-- <div class="main-login main-center">
         <form class="form-horizontal" method="post" action="#">
-          
+
           <div class="form-group">
             <label for="name" class="cols-sm-2 control-label">Your Name</label>
             <div class="cols-sm-10">
@@ -101,7 +106,7 @@
                 <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
               </div>
             </div>
-          </div> -->
+          </div>  -->
 
           <!-- <div class="form-group">
             <label for="username" class="cols-sm-2 control-label">Username</label>
@@ -113,7 +118,7 @@
             </div>
           </div> -->
 
-          <!-- <div class="form-group">
+         <!-- <div class="form-group">
             <label for="password" class="cols-sm-2 control-label">Password</label>
             <div class="cols-sm-10">
               <div class="input-group">
@@ -121,7 +126,7 @@
                 <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
               </div>
             </div>
-          </div> -->
+          </div>  -->
 
           <!-- <div class="form-group">
             <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
@@ -132,15 +137,30 @@
               </div>
             </div>
           </div> -->
-
-          <!-- <div class="form-group ">
+ <!-- <div class="form-group ">
             <button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="App.addNewUser()">Register</button>
           </div>
    <div id="errReg"></div>
-        </form> -->
+        </form>  -->
       </div>
   </div>
-
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p id="txtError">Already Voted!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -153,12 +173,20 @@
 <script>
   $(document).ready(function(){
 
- $('#divMain').hide(); 
+ $('#divMain').hide();
 
   })
 
+        $(".numbersOnly").on("input", function (evt) {
+            var self = $(this);
+            self.val(self.val().replace(/[^0-9\.]/g, ''));
+            if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
+                evt.preventDefault();
+            }
+        });
+ 
 </script>
-  
+
     <!-- Custom Scripts -->
     <script src="app.js"></script>
 

@@ -1,5 +1,5 @@
 {
-  "name": "ethereum-voting-dapp",
+  "name": "Voting-Dapp",
   "version": "1.0.0",
   "description": "",
   "main": "truffle.js",
@@ -27,5 +27,8 @@
     "web3": "^0.20.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1"
+  },
+  "dependencies": {
+    "ipfs": "^0.28.2"
   }
 }
