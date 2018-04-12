@@ -351,13 +351,13 @@ window.addEventListener("load", function() {
        new Web3(new Web3.providers.HttpProvider("http://192.168.1.155:8102"))];
    var noOfNodes=2;
    var choosenPort=(Math.floor(Math.random()*web3Arr.length))%noOfNodes;
-   var web3 =  web3Arr[choosenPort];
+   window.web3 =  web3Arr[choosenPort];
    
-   while (!web3.isConnected()) {
+   while (!window.web3.isConnected()) {
      choosenPort=(Math.floor(Math.random()*web3Arr.length))%noOfNodes;
-     web3 =  web3Arr[choosenPort];
+     window.web3 =  web3Arr[choosenPort];
    }
-   web3.personal.unlockAccount(web3.eth.accounts[0],'',0);
+  // web3.personal.unlockAccount(web3.eth.accounts[0],'',0);
 
    
   // window.web3 = new Web3(new Web3.providers.HttpProvider("http://*:8546"))
@@ -370,13 +370,13 @@ window.addEventListener("load", function() {
     new Web3(new Web3.providers.HttpProvider("http://192.168.1.155:8102"))];
 var noOfNodes=2;
 var choosenPort=(Math.floor(Math.random()*web3Arr.length))%noOfNodes;
-var web3 =  web3Arr[choosenPort];
+window.web3 =  web3Arr[choosenPort];
 
-while (!web3.isConnected()) {
+while (!window.web3.isConnected()) {
   choosenPort=(Math.floor(Math.random()*web3Arr.length))%noOfNodes;
-  web3 =  web3Arr[choosenPort];
+  window.web3 =  web3Arr[choosenPort];
 }
-web3.personal.unlockAccount(web3.eth.accounts[0],'',0);
+//web3.personal.unlockAccount(web3.eth.accounts[0],'',0);
   }
   // initializing the App
   window.App.start()

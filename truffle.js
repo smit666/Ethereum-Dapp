@@ -12,6 +12,12 @@ module.exports = {
       port: 8546,
       network_id: "*",// Match any network id
       gas:"2000000"
+    },
+    local: {
+      host: "192.168.1.155",
+      port: 8102,
+      network_id: "*",// Match any network id
+      gas:"2000000"
     }
   }
 }

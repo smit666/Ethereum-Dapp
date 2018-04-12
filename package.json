@@ -29,6 +29,7 @@
     "webpack-dev-server": "^2.10.1"
   },
   "dependencies": {
+    "fs": "0.0.1-security",
     "ipfs": "^0.28.2"
   }
 }
